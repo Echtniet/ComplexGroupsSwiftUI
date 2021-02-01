@@ -26,30 +26,34 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             List {
-                ScrollView (.horizontal){
-                    VStack (alignment: .leading){
-                        Text("Treding")
-                        HStack {
-                            VStack {
-                                Image("dog")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                Text("Group 1")
-                            }
-                            
-                            Text("Group 6")
-                            Text("Group 2")
-                            Text("Group 3")
-                            Text("Group 4")
-                            Text("Group 5")
-                            Text("test")
-                            Text("Group 3")
-                            Text("Group 4")
-                            Text("Group 5")
-                        }
-                    }
+                VStack (alignment: .leading){
                     
-                }.frame(height:180)
+                    Text("Treding")
+                    ScrollView (.horizontal){
+                        VStack (alignment: .leading){
+                            
+                            HStack {
+                                VStack {
+                                    Image("dog")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                    Text("Group 1")
+                                }
+                                
+                                Text("Group 6")
+                                Text("Group 2")
+                                Text("Group 3")
+                                Text("Group 4")
+                                Text("Group 5")
+                                Text("test")
+                                Text("Group 3")
+                                Text("Group 4")
+                                Text("Group 5")
+                            }
+                        }
+                        
+                    }.frame(height:180)
+                }
                 // post row
                 ForEach(posts, id: \.self){ post in
                     PostView(post: post)
