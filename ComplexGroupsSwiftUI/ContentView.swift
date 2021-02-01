@@ -8,9 +8,20 @@
 
 import SwiftUI
 
+struct Post: Identifiable, Hashable {
+    let id: Int
+    let user, text, imageName: String
+}
+
 struct ContentView: View {
     
-    let posts = ["1", "2", "3"]
+    let posts: [Post] = [
+        .init(id: 0, user: "Clinton Davelaar", text: "I love supra", imageName: "supra"),
+        .init(id: 1, user: "Michael burnes", text: "I love Jags", imageName: "supra"),
+        .init(id: 2, user: "Chandler", text: "I love honda", imageName: "supra"),
+        .init(id: 3, user: "Clinton Davelaar", text: "I love supra", imageName: "supra"),
+        .init(id: 4, user: "Clinton Davelaar", text: "I love supra", imageName: "supra")
+    ]
     
     var body: some View {
         NavigationView{
@@ -19,7 +30,13 @@ struct ContentView: View {
                     VStack (alignment: .leading){
                         Text("Treding")
                         HStack {
-                            Text("Group 1")
+                            VStack {
+                                Image("dog")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                Text("Group 1")
+                            }
+                            
                             Text("Group 6")
                             Text("Group 2")
                             Text("Group 3")
@@ -32,10 +49,10 @@ struct ContentView: View {
                         }
                     }
                     
-                }.frame(height:100)
+                }.frame(height:180)
                 // post row
                 ForEach(posts, id: \.self){ post in
-                    PostView()
+                    PostView(post: post)
                 }
             }.navigationBarTitle(Text("Groups"))
         }
@@ -43,6 +60,8 @@ struct ContentView: View {
 }
 
 struct PostView: View{
+    let post:Post
+    
     var body: some View{
         VStack(alignment: .leading, spacing: 16){
             HStack {
@@ -52,12 +71,12 @@ struct PostView: View{
                     .frame(width:60, height: 60)
                     .clipped()
                 VStack (alignment: .leading, spacing: 4){
-                    Text("Bill Clinton").font(.headline)
+                    Text(post.user).font(.headline)
                     Text("posted 8 hrs ago").font(.subheadline)
                 }.padding(.leading, 8)
             }.padding(.leading, 16).padding(.top, 16)
-            Text("Post body text that will hopefully support auto sizing vertically and span multple lines").lineLimit(nil).padding(.leading, 16).padding(.trailing, 32)
-            Image("supra")
+            Text(post.text).lineLimit(nil).padding(.leading, 16).padding(.trailing, 32)
+            Image(post.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             
