@@ -22,18 +22,18 @@ struct ContentView: View {
     
     let posts: [Post] = [
         .init(id: 0, user: "Clinton Davelaar", text: "I love supra", imageName: "supra"),
-        .init(id: 1, user: "Michael burnes", text: "I love Jags", imageName: "dog"),
-        .init(id: 2, user: "Chandler", text: "I love honda", imageName: "supra"),
+        .init(id: 1, user: "Michael burnes", text: "I love Jags", imageName: "jag"),
+        .init(id: 2, user: "Chandler", text: "I love honda", imageName: "nsx"),
         .init(id: 3, user: "Clinton Davelaar", text: "I love supra", imageName: "supra"),
         .init(id: 4, user: "Clinton Davelaar", text: "I love supra", imageName: "supra")
     ]
     
     let trends: [Trend] = [
         .init(id: 0, text: "Doggos", imageName: "dog"),
-        .init(id: 0, text: "Supras", imageName: "supra"),
-        .init(id: 0, text: "Burgers", imageName: "ppork"),
-        .init(id: 0, text: "More Doggos", imageName: "dog"),
-        .init(id: 0, text: "Jdm power!!!", imageName: "supra")
+        .init(id: 1, text: "Jdm power!!!", imageName: "supra"),
+        .init(id: 2, text: "Burgers", imageName: "ppork"),
+        .init(id: 3, text: "More Doggos", imageName: "dog"),
+        .init(id: 4, text: "Jags", imageName: "jag")
     ]
     
     var body: some View {
