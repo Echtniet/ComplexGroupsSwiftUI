@@ -8,6 +8,11 @@
 
 import SwiftUI
 
+struct Trend: Identifiable, Hashable {
+    let id: Int
+    let text, imageName: String
+}
+
 struct Post: Identifiable, Hashable {
     let id: Int
     let user, text, imageName: String
@@ -17,10 +22,18 @@ struct ContentView: View {
     
     let posts: [Post] = [
         .init(id: 0, user: "Clinton Davelaar", text: "I love supra", imageName: "supra"),
-        .init(id: 1, user: "Michael burnes", text: "I love Jags", imageName: "supra"),
+        .init(id: 1, user: "Michael burnes", text: "I love Jags", imageName: "dog"),
         .init(id: 2, user: "Chandler", text: "I love honda", imageName: "supra"),
         .init(id: 3, user: "Clinton Davelaar", text: "I love supra", imageName: "supra"),
         .init(id: 4, user: "Clinton Davelaar", text: "I love supra", imageName: "supra")
+    ]
+    
+    let trends: [Trend] = [
+        .init(id: 0, text: "Doggos", imageName: "dog"),
+        .init(id: 0, text: "Supras", imageName: "supra"),
+        .init(id: 0, text: "Burgers", imageName: "ppork"),
+        .init(id: 0, text: "More Doggos", imageName: "dog"),
+        .init(id: 0, text: "Jdm power!!!", imageName: "supra")
     ]
     
     var body: some View {
@@ -28,27 +41,15 @@ struct ContentView: View {
             List {
                 VStack (alignment: .leading){
                     
-                    Text("Treding")
+                    Text("Treding").padding(.leading, -2).padding(.bottom, -20)
                     ScrollView (.horizontal){
                         VStack (alignment: .leading){
                             
                             HStack {
-                                VStack {
-                                    Image("dog")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                    Text("Group 1")
+                                ForEach(trends, id: \.self){ trend in
+                                    TrendingView(trend: trend)
                                 }
                                 
-                                Text("Group 6")
-                                Text("Group 2")
-                                Text("Group 3")
-                                Text("Group 4")
-                                Text("Group 5")
-                                Text("test")
-                                Text("Group 3")
-                                Text("Group 4")
-                                Text("Group 5")
                             }
                         }
                         
@@ -60,6 +61,21 @@ struct ContentView: View {
                 }
             }.navigationBarTitle(Text("Groups"))
         }
+    }
+}
+
+struct TrendingView: View{
+    let trend:Trend
+    
+    var body: some View{
+        VStack {
+            Image(trend.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 110, height: 110, alignment: .center)
+                .cornerRadius(12)
+            Text(trend.text).lineLimit(nil)
+        }.frame(width: 120)
     }
 }
 
@@ -83,8 +99,8 @@ struct PostView: View{
             Image(post.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-            
-        }.padding(.leading, -20).padding(.bottom, -8).padding(.trailing, -20)
+                        
+        }.padding(.leading, -20).padding(.bottom, -8).padding(.trailing, -21)
     }
 }
 
