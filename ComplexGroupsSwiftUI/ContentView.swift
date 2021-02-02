@@ -47,7 +47,22 @@ struct ContentView: View {
                             
                             HStack {
                                 ForEach(trends, id: \.self){ trend in
-                                    TrendingView(trend: trend)
+                                    
+                                    NavigationLink(destination: TrendingDetailView(trend: trend)){
+                                        TrendingView(trend: trend)
+                                    }
+                                    /*
+                                     option 2
+                                     ZStack{
+                                        TrendingView(trend: trend)
+                                        NavigationLink(destination: TrendingDetailView()){
+                                            Rectangle()
+                                                .hidden()
+                                        }
+                                    }
+                                     */
+                                    //TrendingView(trend: trend)
+                                        
                                 }
                                 
                             }
@@ -64,17 +79,28 @@ struct ContentView: View {
     }
 }
 
+struct TrendingDetailView: View {
+    let trend: Trend
+    
+    var body: some View{
+        Image(trend.imageName)
+        .resizable()
+        .scaledToFit()
+    }
+}
+
 struct TrendingView: View{
     let trend:Trend
     
     var body: some View{
         VStack {
             Image(trend.imageName)
+                .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 110, height: 110, alignment: .center)
                 .cornerRadius(12)
-            Text(trend.text).lineLimit(nil)
+            Text(trend.text).foregroundColor(.primary).lineLimit(nil)
         }.frame(width: 120)
     }
 }
